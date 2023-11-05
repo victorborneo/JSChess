@@ -1,0 +1,11 @@
+export const tileSize = 100
+export const whiteTile = '#f0f0f0'
+export const darkTile = '#6e6e6e'
+export const moveCircle = '#ff0000'
+export const checkTile = '#ff8800'
+export const checkMateTile = '#ff2200'
+export const staleMateTile = '#00ff44'
+export const moveTile = '#ffff00'
+export const promoteTile = '#adcccc'
+export const playAgainButtonColor = '#E64C3C'
+export const canvasId = 'c'
