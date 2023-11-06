@@ -1,6 +1,6 @@
 import { tileSize, promoteTile } from '../consts.js'
 import * as buttons from './buttons.js'
-import { buttonObjs } from '../main.js'
+import { buttonObjs } from '../shared.js'
 
 function isInBound(i, j) {
     return 0 <= i && i <= 7 && 0 <= j && j <= 7

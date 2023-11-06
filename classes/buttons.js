@@ -1,10 +1,10 @@
-import { tileSize, playAgainButtonColor } from "../consts.js"
 import {
-    mainBoard,
     buttonObjs,
-    redraw,
-    canvas
-} from "../main.js"
+    mainBoard,
+    canvas,
+    redraw
+} from "../shared.js"
+import { tileSize, playAgainButtonColor } from "../consts.js"
 
 class Button {
     #x
