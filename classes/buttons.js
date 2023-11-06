@@ -109,7 +109,7 @@ export class PromoteButton extends Button {
     draw() {
         ctx.fillStyle = this.getColor()
         ctx.fillRect(this.getX(), this.getY(), this.getWidth(), this.getHeight())
-        this.#piece.draw(ctx)
+        this.#piece.draw()
     }
 
     whenPressed() {
