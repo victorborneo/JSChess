@@ -1,6 +1,6 @@
 import { tileSize, promoteTile } from '../consts.js'
 import * as buttons from './buttons.js'
-import { buttonObjs } from '../shared.js'
+import { buttonObjs, ctx } from '../shared.js'
 
 function isInBound(i, j) {
     return 0 <= i && i <= 7 && 0 <= j && j <= 7
@@ -44,7 +44,12 @@ class Piece {
         return this.constructor.name
     }
 
-    draw(ctx) {
+    draw() {
+        if (!this.#img.complete) {
+            this.#img.onload = () => { this.draw() }
+        } else {
+            this.#img.onload = null
+        }
         ctx.drawImage(this.#img, this.#j * tileSize, this.#i * tileSize, tileSize, tileSize)
     }
 
