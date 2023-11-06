@@ -9,7 +9,7 @@ import {
 } from '../consts.js'
 import * as pieces from './pieces.js'
 import { PlayAgainButton } from './buttons.js'
-import { buttonObjs } from '../shared.js'
+import { buttonObjs, ctx } from '../shared.js'
 
 export class Board {
     #lastFromI
@@ -30,7 +30,7 @@ export class Board {
         this.#promoting = false
     }
 
-    draw(ctx) {
+    draw() {
         for (let i = 0; i < 8; i++) {
             for (let j = 0; j < 8; j++) {
                 const tile = this.#matrix[i][j]
@@ -42,10 +42,13 @@ export class Board {
                     const isCheckmateOrStaleMate = this.checkCheckmateOrStalemate()
                     if (isCheckmateOrStaleMate === 'checkmate') {
                         ctx.fillStyle = checkMateTile
-                        buttonObjs.push(new PlayAgainButton())
+                        const winner = this.#turn === 'black' ? 'White' : 'Black'
+                        buttonObjs.push(new PlayAgainButton(`${winner} wins!`))
                     } else if (isCheckmateOrStaleMate === 'stalemate') {
                         ctx.fillStyle = staleMateTile
-                    } else if (this.checkCheck()) {
+                        buttonObjs.push(new PlayAgainButton("Stalemate!"))
+                    } 
+                    else if (this.checkCheck()) {
                         ctx.fillStyle = checkTile
                     }
                 }

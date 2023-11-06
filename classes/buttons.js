@@ -2,7 +2,7 @@ import {
     buttonObjs,
     mainBoard,
     canvas,
-    redraw
+    ctx
 } from "../shared.js"
 import { tileSize, playAgainButtonColor } from "../consts.js"
 
@@ -57,16 +57,19 @@ class Button {
 }
 
 export class PlayAgainButton extends Button {
-    constructor() {
+    #resultText
+
+    constructor(resultText) {
         const width = tileSize * 3.9
         const height = tileSize * 1.9
         const x = (canvas.width - width) / 2
         const y = (canvas.height - height) / 2
         const color = playAgainButtonColor
         super(x, y, width, height, color)
+        this.#resultText = resultText
     }
 
-    draw(ctx) {
+    draw() {
         ctx.fillStyle = this.getColor()
         ctx.beginPath()
         ctx.roundRect(this.getX(), this.getY(), this.getWidth(), this.getHeight(), 100)
@@ -81,14 +84,13 @@ export class PlayAgainButton extends Button {
         let winner = mainBoard.getTurn()
         winner = winner.charAt(0).toUpperCase() + winner.slice(1)
 
-        ctx.fillText(`${winner} wins!`, tileSize * 4, tileSize * 3.9)
+        ctx.fillText(this.#resultText, tileSize * 4, tileSize * 3.9)
         ctx.fillText('Play Again', tileSize * 4, tileSize * 3.9 + fontSize)
     }
 
     whenPressed() {
         buttonObjs.splice(0, buttonObjs.length)
         mainBoard.newGame()
-        redraw()
     }
 }
 
@@ -116,6 +118,5 @@ export class PromoteButton extends Button {
         this.#piece.setJ(this.#originalJ)
         mainBoard.setPiece(this.#originalI, this.#originalJ, this.#piece)
         mainBoard.setPromoting(false)
-        redraw()
     }
 }

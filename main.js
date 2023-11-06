@@ -1,19 +1,46 @@
-import { tileSize } from './consts.js'
+import { tileSize, moveCircle } from './consts.js'
 import {
     mainBoard,
     buttonObjs,
     canvas,
-    redraw,
-    moves,
-    clearMoves,
-    setMoves
+    ctx
 } from './shared.js'
 
 let fromI
 let fromJ
+let moves = []
 
 canvas.width = tileSize * 8
 canvas.height = tileSize * 8
+
+function redraw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    mainBoard.draw(ctx)
+    
+    for (const line of mainBoard.getMatrix()) {
+        for (const tile of line) {
+            if (tile !== 0) {
+                tile.draw(ctx)
+            }
+        }
+    }
+
+    for (const button of buttonObjs) {
+        button.draw(ctx)
+    }
+
+    ctx.fillStyle = moveCircle
+    for (const move of moves) {
+        ctx.beginPath()
+        ctx.arc(
+            tileSize / 2 + move.x * tileSize,
+            tileSize / 2 + move.y * tileSize,
+            tileSize * 0.1,
+            0, Math.PI * 2
+        )
+        ctx.fill()
+    }
+}
 
 function main() {
     redraw()
@@ -22,6 +49,7 @@ function main() {
         for (const button of buttonObjs) {
             if (button.pressed(evt.clientX, evt.clientY)) {
                 button.whenPressed()
+                redraw()
                 return
             }
         }
@@ -34,13 +62,14 @@ function main() {
             if (move.x === j && move.y === i) {
                 mainBoard.movePiece(fromI, fromJ, i, j, move.extra)
                 mainBoard.passTurn()
+                mainBoard.checkCheckmateOrStalemate()
                 flag = true
-                clearMoves()
+                moves = []
             }
         }
 
         if (!flag) {
-            setMoves(mainBoard.getPieceMoves(i, j))
+            moves = mainBoard.getPieceMoves(i, j)
             fromI = i
             fromJ = j
         }
