@@ -15,18 +15,18 @@ canvas.height = tileSize * 8
 
 function redraw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    mainBoard.draw(ctx)
+    mainBoard.draw()
     
     for (const line of mainBoard.getMatrix()) {
         for (const tile of line) {
             if (tile !== 0) {
-                tile.draw(ctx)
+                tile.draw()
             }
         }
     }
 
     for (const button of buttonObjs) {
-        button.draw(ctx)
+        button.draw()
     }
 
     ctx.fillStyle = moveCircle
