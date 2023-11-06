@@ -9,4 +9,4 @@ Just create a canvas in your html and copy this project. Also, change the 'canva
 
 That should do it... I think
 
-Ah, I haven't implemented draw by repetition of insufficient material. Not because it's hard or anything, I just thought those were lame rules lmao. Maybe I'll add them someday
+Ah, I haven't implemented draw by repetition or insufficient material. Not because it's hard or anything, I just thought those were lame rules lmao. Maybe I'll add them someday
