@@ -22,8 +22,8 @@ class Button {
     }
 
     pressed(x, y) {
-        const isInX = this.#x <= x && x <= this.#x + this.#width
-        const isInY = this.#y <= y && y <= this.#y + this.#height
+        const isInX = canvas.offsetLeft + this.#x <= x && x <= canvas.offsetLeft + this.#x + this.#width
+        const isInY = canvas.offsetTop + this.#y <= y && y <= canvas.offsetTop + this.#y + this.#height
         return isInX && isInY
     }
 

@@ -47,8 +47,7 @@ export class Board {
                     } else if (isCheckmateOrStaleMate === 'stalemate') {
                         ctx.fillStyle = staleMateTile
                         buttonObjs.push(new PlayAgainButton("Stalemate!"))
-                    } 
-                    else if (this.checkCheck()) {
+                    } else if (this.checkCheck()) {
                         ctx.fillStyle = checkTile
                     }
                 }
