@@ -62,7 +62,6 @@ function main() {
             if (move.x === j && move.y === i) {
                 mainBoard.movePiece(fromI, fromJ, i, j, move.extra)
                 mainBoard.passTurn()
-                mainBoard.checkCheckmateOrStalemate()
                 flag = true
                 moves = []
             }
