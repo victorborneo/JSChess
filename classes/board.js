@@ -9,7 +9,7 @@ import {
 } from '../consts.js'
 import * as pieces from './pieces.js'
 import { PlayAgainButton } from './buttons.js'
-import { buttonObjs } from '../main.js'
+import { buttonObjs } from '../shared.js'
 
 export class Board {
     #lastFromI
@@ -131,11 +131,9 @@ export class Board {
         this.#lastToI = toI
         this.#lastToJ = toJ
         
-        this.#matrix[toI][toJ] = piece
-        this.#matrix[fromI][fromJ] = 0
         piece.setI(toI)
         piece.setJ(toJ)
-
+        
         if (['Rook', 'King'].includes(piece.getName())) {
             piece.setHasMoved()
         } else if (piece.getName() === 'Pawn') {
@@ -148,6 +146,9 @@ export class Board {
                 this.#promoting = true
             }
         }
+
+        this.#matrix[toI][toJ] = piece
+        this.#matrix[fromI][fromJ] = 0
 
         if (extra) {
             this.movePiece(extra.fromI, extra.fromJ, extra.toI, extra.toJ)
