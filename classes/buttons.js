@@ -106,7 +106,7 @@ export class PromoteButton extends Button {
         this.#originalJ = originalJ
     }
 
-    draw(ctx) {
+    draw() {
         ctx.fillStyle = this.getColor()
         ctx.fillRect(this.getX(), this.getY(), this.getWidth(), this.getHeight())
         this.#piece.draw(ctx)
